@@ -21,12 +21,11 @@ function App() {
 
     try {
       newInputs = translateNumBase(value, base)
+      setInputs(newInputs)
     } catch (err) {
-      setInputs({ ...inputs, [base]: value })
+      setInputs({ ...DEFAULT_DATA, [base]: value })
       setErrorText(err.message)
     }
-
-    setInputs(newInputs)
   }
 
   return (
