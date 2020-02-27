@@ -1,3 +1,7 @@
+#root {
+  --font-size: 25px;
+}
+
 .app {
   height: 100vh;
   width: 100vw;
@@ -6,7 +10,7 @@
   align-items: center;
   text-align: center;
   justify-content: flex-start;
-  font-size: calc(10px + 2vmin);
+  font-size: var(--font-size);
   background-color: #282c34;
   color: white;
 }
