@@ -34,12 +34,12 @@ function App() {
     <div className="app">
       <p className="title">Number Convertor</p>
       <div className="data">
-        {baseSequence.map((base) => (
+        {baseSequence.map((base, idx) => (
           <div className="row" key={`base-${base}`}>
             <p className="data-name">{baseNumToText[base]}</p>
             <input
               className="num-input"
-              autoFocus
+              autoFocus={idx === 0}
               type="text"
               value={inputs[base]}
               onChange={(event) => handleChange(event, base)}
