@@ -21,7 +21,6 @@ function App() {
 
     try {
       newInputs = translateNumBase(value, base)
-      console.log(newInputs)
     } catch (err) {
       setInputs({ ...inputs, [base]: value })
       setErrorText(err.message)
