@@ -2,33 +2,28 @@ import React from 'react'
 import { translateNumBase } from './helper'
 import './App.css'
 
-const DEFAULT_DATA = { decimal: '', hex: '', binary: '' }
-const START_DATA = { decimal: '', hex: '', binary: '' }
+const DEFAULT_DATA = { 10: '', 16: '', 2: '' }
+const START_DATA = { 10: '', 16: '', 2: '' }
+const baseNumToText = {
+  10: 'Decimal',
+  16: 'Hex',
+  2: 'Binary',
+}
+const baseSequence = [10, 16, 2]
 
 function App() {
   const [inputs, setInputs] = React.useState(START_DATA)
   const [errorText, setErrorText] = React.useState('')
 
-  function handleChange(event, name) {
+  function handleChange(event, base) {
     const value = event.target.value
     let newInputs = DEFAULT_DATA
 
     try {
-      switch (name) {
-        case 'hex':
-          newInputs = translateNumBase(value, 16)
-          break
-        case 'binary':
-          newInputs = translateNumBase(value, 2)
-          break
-        case 'decimal':
-          newInputs = translateNumBase(value, 10)
-          break
-        default:
-          break
-      }
+      newInputs = translateNumBase(value, base)
+      console.log(newInputs)
     } catch (err) {
-      setInputs({ ...inputs, [name]: value })
+      setInputs({ ...inputs, [base]: value })
       setErrorText(err.message)
     }
 
@@ -39,15 +34,15 @@ function App() {
     <div className="app">
       <p className="title">Number Convertor</p>
       <div className="data">
-        {Object.entries(inputs).map(([name, val]) => (
-          <div className="row" key={name}>
-            <p className="data-name">{name}</p>
+        {baseSequence.map((base) => (
+          <div className="row" key={`base-${base}`}>
+            <p className="data-name">{baseNumToText[base]}</p>
             <input
               className="num-input"
               autoFocus
               type="text"
-              value={val}
-              onChange={(event) => handleChange(event, name)}
+              value={inputs[base]}
+              onChange={(event) => handleChange(event, base)}
             />
           </div>
         ))}
